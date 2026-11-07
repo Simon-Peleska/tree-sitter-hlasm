@@ -9,7 +9,7 @@
     {
       devShells = forAll (pkgs: {
         default = pkgs.mkShell {
-          packages = [ ];
+          packages = [ pkgs.nodejs_22 pkgs.tree-sitter pkgs.gcc pkgs.gnumake pkgs.python3 pkgs.jdk pkgs.antlr4_13 ];
         };
       });
     };

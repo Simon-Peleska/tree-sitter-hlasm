@@ -1,2 +1,19 @@
 /.direnv
 /result
+node_modules/
+build/
+prebuilds/
+*.log
+test/tmp/
+
+
+# editor/OS
+.DS_Store
+*.swp
+test/*/.work/
+
+# python bindings
+*.egg-info/
+__pycache__/
+*.so
+*.pyd

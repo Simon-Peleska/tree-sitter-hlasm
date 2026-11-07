@@ -1,0 +1,348 @@
+============================================================
+IMS MFS format and message descriptors
+============================================================
+
+* CUSTOMER INQUIRY SCREEN
+CUSTFMT  FMT
+         DEV   TYPE=(3270,2),FEAT=IGNORE,SYSMSG=ERRMSG
+         DIV   TYPE=INOUT
+         DPAGE CURSOR=((3,20))
+         DFLD  'CUSTOMER NUMBER:',POS=(3,2),ATTR=(PROT,HI)
+CUSTNO   DFLD  POS=(3,20),LTH=8
+         FMTEND
+CUSTI    MSG   TYPE=INPUT,SOR=(CUSTFMT,IGNORE),NXT=CUSTO
+         SEG
+         MFLD  CUSTNO,LTH=8
+         MFLD  (PFKEYS,'01'),LTH=2
+         MSGEND
+         END
+
+------------------------------------------------------------
+
+(source_file
+  (comment)
+  (statement
+    (name)
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (list
+              (word)
+              (word)))))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (string)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation))
+  (statement
+    (operation)))
+
+============================================================
+Continuation lines and sequence numbers
+============================================================
+
+         DEV   TYPE=(3270,2),SYSMSG=ERRMSG,  PF KEYS FOLLOW            X00030000
+               PFK=(PFKEYS,1='PF01',3='END')                            00040000
+         DFLD  'A LITERAL THAT IS LONG ENOUGH TO RUN INTO THE CONTINUATIX
+               ON COLUMN',POS=(5,2)
+         MVC   FIELDA,FIELDB      COPY THE FIELD AND EXPLAIN IT ON     X
+                                  A SECOND LINE
+         CALL  SUBPROG,(FIELDA,FIELDB,FIELDC,FIELDD,FIELDE,FIELDF,LONGNX
+               AME)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (remarks)
+      (continuation)
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (keyword_operand
+              (keyword)
+              (expression
+                (string)))
+            (keyword_operand
+              (keyword)
+              (expression
+                (string))))))))
+  (sequence_number)
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks
+      (continuation)))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (list
+          (word)
+          (word)
+          (word)
+          (word)
+          (word)
+          (word)
+          (word))))))
+
+============================================================
+Macro definition and conditional assembly
+============================================================
+
+         MACRO
+&NAME    GETFLD &FIELD,&LEN=,&TYPE=C
+.* VALIDATE THE OPERANDS
+         AIF   ( ('&LEN' EQ '') AND (T'&FIELD NE 'O') ).DEFLEN
+&B(1)    SETB  ('&TYPE' EQ 'X')
+&NAME    MVC   WORK(L'&FIELD),&FIELD
+         CLC   WORK(4),=F'0'
+         AGO   .DONE
+.DEFLEN  ANOP
+#@F_&SYSNDX DS CL8
+.DONE    MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (keyword_operand
+        (keyword))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (comment)
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (list
+            (string)
+            (word)
+            (string))
+          (word)
+          (list
+            (word)
+            (word)
+            (string)))
+        (word))))
+  (statement
+    (name
+      (list
+        (word)))
+    (operation)
+    (operands
+      (expression
+        (list
+          (string)
+          (word)
+          (string)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)))
+
+============================================================
+Comment lines
+============================================================
+
+*********************************************************************  *
+* A BOX OF 72 ASTERISKS CONTINUES INTO THE NEXT LINE
+.* MACRO COMMENT
+         SPACE 2
+
+------------------------------------------------------------
+
+(source_file
+  (comment
+    (continuation))
+  (comment)
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)))))
+
+============================================================
+Unterminated string
+:error
+============================================================
+
+         DFLD  'NO END,POS=(1,2)
+
+------------------------------------------------------------
+
+

@@ -1,0 +1,38 @@
+{
+  "grammars": [
+    {
+      "name": "hlasm",
+      "camelcase": "Hlasm",
+      "scope": "source.hlasm",
+      "path": ".",
+      "file-types": [
+        "hlasm",
+        "asm",
+        "mfs",
+        "mac",
+        "mlc"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^hlasm$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Simon Peleska"
+      }
+    ]
+  },
+  "bindings": {
+    "c": false,
+    "go": false,
+    "java": false,
+    "node": true,
+    "python": true,
+    "rust": false,
+    "swift": false,
+    "zig": false
+  }
+}
