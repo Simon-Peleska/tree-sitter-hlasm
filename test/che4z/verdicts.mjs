@@ -46,7 +46,12 @@ async function startServer() {
       } else if (message.method === "workspace/configuration") {
         // The server's requests have ids of their own, which collide with ours, so they are
         // told apart by their method. It analyses nothing until this one is answered.
-        send(server, { id: message.id, result: message.params.items.map(() => null) });
+        // Without a limit far above any file's count, Che4z replaces all diagnostics of a file
+        // with more than 10 by a single SUP "diagnostics suppressed".
+        const result = message.params.items.map((item) =>
+          item.section === "hlasm.diagnosticsSuppressLimit" ? 1_000_000 : null,
+        );
+        send(server, { id: message.id, result });
       } else if (message.method !== undefined) {
         if (message.id !== undefined) send(server, { id: message.id, result: null });
       } else if (server.pending.has(message.id)) {

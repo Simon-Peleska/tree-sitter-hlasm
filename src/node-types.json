@@ -91,17 +91,7 @@
   {
     "type": "name",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "list",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "operands",
@@ -136,17 +126,7 @@
   {
     "type": "operation",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "list",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "remarks",

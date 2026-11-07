@@ -9,7 +9,7 @@
 // into column 72 is lexed here so it stops at column 71; columns are 0-based
 // below (CONTINUATION_COLUMN is column 72).
 
-enum TokenType { WORD, STRING, REMARK, OPERAND_REMARK, COMMENT_LINE, CONTINUATION, SEQUENCE_NUMBER, ERROR_SENTINEL };
+enum TokenType { WORD, STRING, REMARK, OPERAND_REMARK, COMMENT_LINE, CONTINUATION, SEQUENCE_NUMBER, ERROR_SENTINEL, FIELD };
 
 #define CONTINUATION_COLUMN 71
 
@@ -47,6 +47,9 @@ static bool is_word_char(int32_t c) {
   return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') ||
          c == '@' || c == '#' || c == '$' || c == '_' || c == '&' || c == '.' || c > 127;
 }
+
+// Files that went through a binary transfer carry NUL bytes; Che4z reads them as blanks.
+static bool is_blank(int32_t c) { return c == ' ' || c == '\t' || c == 0; }
 
 static bool is_attribute(int32_t c) {
   switch (c) {
@@ -112,12 +115,31 @@ bool tree_sitter_hlasm_external_scanner_scan(void *payload, TSLexer *lexer, cons
       lexer->result_symbol = COMMENT_LINE;
       return true;
     }
-    if (!valid_symbols[WORD]) return false;
-    while (column < CONTINUATION_COLUMN && is_word_char(lexer->lookahead)) {
-      lexer->advance(lexer, false);
-      column++;
+    if (!valid_symbols[FIELD]) return false;
+  }
+
+  if (valid_symbols[FIELD] && !is_blank(lexer->lookahead)) {
+    for (;;) {
+      while (column < CONTINUATION_COLUMN && !is_blank(lexer->lookahead) && !at_line_end(lexer)) {
+        // z390 allows quoted names with blanks in them ('X0 AR 1,2 '); an unpaired quote is an error.
+        if (lexer->lookahead == '\'') {
+          do {
+            lexer->advance(lexer, false);
+            column++;
+            if (column >= CONTINUATION_COLUMN || at_line_end(lexer)) return false;
+          } while (lexer->lookahead != '\'');
+        }
+        lexer->advance(lexer, false);
+        column++;
+      }
+      lexer->mark_end(lexer);
+      // A field that runs into column 72 goes on in column 16 of the next line.
+      if (column != CONTINUATION_COLUMN || at_line_end(lexer) || lexer->lookahead == ' ') break;
+      skip_continuation(lexer);
+      if (is_blank(lexer->lookahead) || at_line_end(lexer)) break;
+      column = lexer->get_column(lexer);
     }
-    lexer->result_symbol = WORD;
+    lexer->result_symbol = FIELD;
     return true;
   }
 

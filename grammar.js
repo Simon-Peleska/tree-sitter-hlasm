@@ -24,6 +24,7 @@ module.exports = grammar({
     $.continuation,
     $.sequence_number,
     $._error_sentinel,
+    $._field,
   ],
 
   extras: $ => [$.continuation, $.sequence_number],
@@ -82,9 +83,10 @@ module.exports = grammar({
 
     _list_item: $ => choice($.keyword_operand, $._term),
 
-    // Subscripted and created SET symbols: &B(1), #@IF_&LVL(&N)_X
-    name: $ => seq($._word, repeat(choice($._word, $.list))),
-    operation: $ => seq($._word, repeat(choice($._word, $.list))),
+    // Name and operation are any run of non-blanks: &B(1), :&X (z390), */ in
+    // PL/S text that a macro skips. Whether they make sense is semantics.
+    name: $ => $._field,
+    operation: $ => $._field,
 
     word: $ => $._word,
 
@@ -95,7 +97,7 @@ module.exports = grammar({
 
     comment: $ => seq($._comment_line, repeat($._remark)),
 
-    _blank: _ => /[ \t]+/,
+    _blank: _ => /[ \t\x00]+/,
     _newline: _ => /\r?\n/,
   },
 });
