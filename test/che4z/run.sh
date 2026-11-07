@@ -46,6 +46,9 @@ done
 ls "$files"/* >"$work/paths.txt"
 
 echo "run: Che4z analyses $(wc -l <"$work/paths.txt") files"
-node "$here/verdicts.mjs" "$server" "$work/paths.txt" >"$work/che4z-verdicts.tsv"
+# Che4z loops on some inputs while allocating without bound; the cap kills it before the
+# machine runs out of memory, which would otherwise take every other process down with it.
+systemd-run --user --scope --quiet -p MemoryMax=8G -p MemorySwapMax=0 \
+	node "$here/verdicts.mjs" "$server" "$work/paths.txt" >"$work/che4z-verdicts.tsv"
 
 node "$here/../compare.mjs" "$work/che4z-verdicts.tsv" "$here/baseline.tsv" "$@"
