@@ -56,6 +56,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "repro_data"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_blank"
         }
       ]
@@ -105,48 +109,66 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SEQ",
+                      "type": "CHOICE",
                       "members": [
                         {
-                          "type": "FIELD",
-                          "name": "operands",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "operands"
-                          }
-                        },
-                        {
-                          "type": "CHOICE",
+                          "type": "SEQ",
                           "members": [
                             {
-                              "type": "SEQ",
-                              "members": [
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "_blank"
-                                },
-                                {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "FIELD",
-                                      "name": "remarks",
-                                      "content": {
-                                        "type": "SYMBOL",
-                                        "name": "remarks"
-                                      }
-                                    },
-                                    {
-                                      "type": "BLANK"
-                                    }
-                                  ]
-                                }
-                              ]
+                              "type": "FIELD",
+                              "name": "operands",
+                              "content": {
+                                "type": "SYMBOL",
+                                "name": "operands"
+                              }
                             },
                             {
-                              "type": "BLANK"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SEQ",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "_blank"
+                                    },
+                                    {
+                                      "type": "CHOICE",
+                                      "members": [
+                                        {
+                                          "type": "FIELD",
+                                          "name": "remarks",
+                                          "content": {
+                                            "type": "SYMBOL",
+                                            "name": "remarks"
+                                          }
+                                        },
+                                        {
+                                          "type": "BLANK"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BLANK"
+                                }
+                              ]
                             }
                           ]
+                        },
+                        {
+                          "type": "FIELD",
+                          "name": "remarks",
+                          "content": {
+                            "type": "ALIAS",
+                            "content": {
+                              "type": "SYMBOL",
+                              "name": "_operand_field_remarks"
+                            },
+                            "named": true,
+                            "value": "remarks"
+                          }
                         }
                       ]
                     },
@@ -411,6 +433,22 @@
         "name": "_remark"
       }
     },
+    "_operand_field_remarks": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_operand_field_remark"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_remark"
+          }
+        }
+      ]
+    },
     "comment": {
       "type": "SEQ",
       "members": [
@@ -484,6 +522,14 @@
     {
       "type": "SYMBOL",
       "name": "_field"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_operand_field_remark"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "repro_data"
     }
   ],
   "inline": [],

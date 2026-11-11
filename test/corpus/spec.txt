@@ -1,0 +1,4855 @@
+============================================================
+Chapter 2: expr terms
+============================================================
+
+         DC    A(NINE+FIVE,9*FIVE,+NINE,-FIVE,TEN/3)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (word)
+          (word)
+          (operator)
+          (word))))))
+
+============================================================
+Chapter 2: remark after space
+============================================================
+
+LABEL    AR    3,4
+COMP     CR    5,6         NEW SUM TO OLD
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks)))
+
+============================================================
+Chapter 2: mvc nested
+============================================================
+
+MOVE     MVC   TO(8),FROM(A+B*(C-D))
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (list
+            (word)
+            (operator)
+            (word)))))))
+
+============================================================
+Chapter 2: length attr
+============================================================
+
+         MVC   TO(L'OPND1),FROM
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 2: dc bitlen
+============================================================
+
+         DC    CL.7'AB'
+         DC    F'1.7E4'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 2: literal
+============================================================
+
+         L     6,=F'2'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string)))))
+
+============================================================
+Chapter 2: qualified
+============================================================
+
+         L     6,QUAL.SYMBOL
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 2: dbcs like
+============================================================
+
+         DC    C'<.A.B.C>abc'
+         DC    G'<D1D2D3D4>'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 2: space operand end
+============================================================
+
+         LA    R1,4+5
+         LA    R1,4 + 5
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks)))
+
+============================================================
+Chapter 2: cl length attr
+============================================================
+
+         DC    CL(L'STRLEN)' '
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (string)))))
+
+============================================================
+Chapter 2: quote space
+============================================================
+
+         MVC   AREA1,=C'This Area'
+         LA    R1,=C'This is OK (isn''t it)'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string)))))
+
+============================================================
+Chapter 2: end comma remark
+============================================================
+
+         END   ,   End of Program
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (remarks))))
+
+============================================================
+Chapter 2: paren expr
+============================================================
+
+         DC    A(14+BETA-(GAMMA-LAMBDA),A+B-(C+D-(E+F)+1))
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (list
+            (word)
+            (operator)
+            (word))
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (list
+            (word)
+            (operator)
+            (word)
+            (operator)
+            (list
+              (word)
+              (operator)
+              (word))
+            (operator)
+            (word)))))))
+
+============================================================
+Chapter 2: symbols
+============================================================
+
+ORDSYM#435A DS F
+$OPEN    DS    F
+#123     DS    F
+@33      DS    F
+_TOTAL_SAVED DS F
+B49467LITTLENAIL DS F
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)))))
+
+============================================================
+Chapter 2: var symbols
+============================================================
+
+&VARYINGSYMABC SETA 1
+&@ME     SETA  1
+&EASY_TO_READ SETC 'X'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)))))
+
+============================================================
+Chapter 2: seq symbols
+============================================================
+
+.BLABEL4 ANOP
+.#359    ANOP
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation))
+  (statement
+    (name)
+    (operation)))
+
+============================================================
+Chapter 2: equ ds
+============================================================
+
+X        EQU   Y
+A        DS    (B-A)C
+B        LR    1,2
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (operator)
+          (word))
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 2: sdt
+============================================================
+
+         DC    A(B'1111',X'F1',C'AB',C'/',C' ',C'13')
+         DC    C'A''#'
+         DC    C''''
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (string)
+          (word)
+          (string)
+          (word)
+          (string)
+          (word)
+          (string)
+          (word)
+          (string)
+          (word)
+          (string)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 2: tm
+============================================================
+
+ALPHA    TM    GAMMA,B'11111'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 2: loc counter
+============================================================
+
+DONE     DC    CL3'ABC'
+BEFORE   EQU   *
+NEXT     DS    D
+THERE    L     3,=3A(*)
+HERE     B     *+8
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (operator))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (list
+          (operator)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (operator)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 2: length star
+============================================================
+
+         MVC   TO(L'*),FROM
+         LA    1,L'*+2
+         MVC   TO(L'TO-2),FROM
+LOCTREF  EQU   L'*
+LENGTH1  DC    A(L'*)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (operator)
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator))))))
+
+============================================================
+Chapter 2: equ forms
+============================================================
+
+RELOC3   EQU   TO,44
+SDT2     EQU   X'FF'+A-B
+SDT3     EQU   C'YUK'
+ASTERISK EQU   *+1
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)
+        (operator)
+        (word)
+        (operator)
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (operator)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 2: loord
+============================================================
+
+LOORD    MVC   A1+L'A1-L'B2(L'B2),B2
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)
+        (operator)
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 2: literals
+============================================================
+
+         L     3,=F'33'
+         MVC   FLAG,=X'00'
+         MVI   FLAG,X'00'
+ZERO     EQU   X'00'
+         MVC   A,=1XL5'F3'
+BETA     L     1,=F'274'+4
+DELTA    LH    5,=H'11,23,39,48,64'(6)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string)
+        (operator)
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string)
+        (list
+          (word))))))
+
+============================================================
+Chapter 2: exprs
+============================================================
+
+         DC    A(AREA1+X'2D',*+32,N-25,(EXIT-ENTRY+1)+GO)
+         DC    A(ALPHA-BETA/(10+AREA*L'FIELD)-1)
+         L     1,=A(1,133,175,221)+8
+         DC    A((*+*)-(*+*),*-*,*-Y)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)
+          (string)
+          (operator)
+          (operator)
+          (word)
+          (word)
+          (operator)
+          (word)
+          (list
+            (word)
+            (operator)
+            (word)
+            (operator)
+            (word))
+          (operator)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (list
+            (word)
+            (operator)
+            (word)
+            (operator)
+            (word))
+          (operator)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (list
+          (word)
+          (word)
+          (word)
+          (word))
+        (operator)
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (list
+            (operator)
+            (operator)
+            (operator))
+          (operator)
+          (list
+            (operator)
+            (operator)
+            (operator))
+          (operator)
+          (operator)
+          (operator)
+          (operator)
+          (operator)
+          (word))))))
+
+============================================================
+Chapter 2: csect comma
+============================================================
+
+SECT_A   CSECT ,
+CLASS_X  CATTR RMODE(ANY)
+CLASS_X  CATTR ,
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands)))
+
+============================================================
+Chapter 3: cattr remark
+============================================================
+
+PClass   CATTR Part(Part_R),RMODE(ANY) Define class PClass, part Part_R
+CLASS_B  CATTR DEFLOAD,RMODE(ANY) Define deferred-load class
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word))))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word))))
+    (remarks)))
+
+============================================================
+Chapter 3: using
+============================================================
+
+         BASR  12,0
+         USING *,12
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (operator))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 3: qualified
+============================================================
+
+         MVC   TARGET.X,SOURCE.X
+         MVC   TARGET.Y+5(3),SOURCE.Y+5
+         XC    TARGET.X+1(L'X-1),TARGET.X+1
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (operator)
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)))
+      (expression
+        (word)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 3: dsect
+============================================================
+
+DATAMAP  DSECT ,
+         USING DATAMAP,REALDATA Map DSECT onto REALDATA
+DATA2    DC    CL32'Actual Data'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (remarks))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 3: alias
+============================================================
+
+         STM   14,12,12(13)
+BDATAOff DC    Q(BDATA)
+EX_SYM   DC    V(EXMOD1)
+EXMOD1   ALIAS C'XMD1PGM'
+         EXTRN EXMOD1 Identify the external symbol
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)))
+    (remarks)))
+
+============================================================
+Chapter 4: empty first
+============================================================
+
+         BC    ,D(X,B)
+         BCR   ,R
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)))))
+
+============================================================
+Chapter 4: ops
+============================================================
+
+LABEL    L     4,256(5,1)    LOAD INTO REG4
+         ICM   3,X'E',1024(10)
+         L     2,200(,10)
+         L     3,IMPLICIT(INDEX)
+         CLI   40(9),X'40'
+         CLI   KEY,C'E'
+         AP    40(9,8),30(6,7)
+         AP    DISP40(,8),DISP30(,7)
+         MVC   0(80,8),0(7)
+         SRP   FIELD1,X'80',3
+         BRAS  14,A-B+C+10
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)
+          (word))))
+    (remarks))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (word)
+        (operator)
+        (word)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 5: process
+============================================================
+
+*PROCESS OVERRIDE(ADATA,MXREF(FULL))
+         END
+
+------------------------------------------------------------
+
+(source_file
+  (comment)
+  (statement
+    (operation)))
+
+============================================================
+Chapter 5: cattr list
+============================================================
+
+MYCLASS  CATTR RMODE(24),RMODE(ANY)
+MYCLASS  CATTR ALIGN(3),EXECUTABLE,NOTREUS,RMODE(24)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word))))))
+
+============================================================
+Chapter 5: ccw
+============================================================
+
+WRITE1   CCW   1,DATADR,X'48',X'50'
+A        CCW1  X'0C',BUF1,X'00',L'BUF1
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: cnop
+============================================================
+
+         CNOP  6,8
+         BCR   0,0
+         BC    0,X'700'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: com
+============================================================
+
+         MVC   PDQ(16),=4C'ABCD'
+         COM
+XYZ      DS    16F
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: dxd
+============================================================
+
+ALPHA    DXD   2DL8
+B        DXD   3F,XL4
+         DC    Q(EPSILON,ZETA)
+OMEGA    CXD
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)))
+
+============================================================
+Chapter 5: modifiers
+============================================================
+
+         DC    1EBP(7)L2'12'
+SYM      DC    FP(Rate5)'35.92'
+         DC    FS8'35.92'
+         DC    EE3'3.414'
+ALL3     DC    DL7S3E5'2.7182'
+         DC    FS(X)'35.92'
+TRUNCF   DC    2FL.12'276'
+FLOAT    DC    DE+4'+46,-3.729,+473'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: types
+============================================================
+
+         DC    CUL4'XX'
+         DC    FD'32'
+         DC    LQ'565.4'
+         DC    AD(WHERE)
+         DC    VD(BIGOTHER)
+         DC    J(CLASS)
+         DC    QL1(LITTLE)
+         DC    R(APSECT)
+         DC    RD(BPSECT)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))))))
+
+============================================================
+Chapter 5: chars
+============================================================
+
+         DC    CL3'ABC'
+         DC    C'A,B'
+         DC    CU'UNICODE',CA'ASCII',CE'EBCDIC'
+FIELD    DC    C'TOTAL IS &&10'
+FIELD    DC    3CL4'ABCDE'
+         MVC   AREA(12),=3CL4'ABCDE'
+         DC    C'abc<.A.B.C>def'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: binary space
+============================================================
+
+BFOUR    DC    B'11110001 11110010'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: fixed
+============================================================
+
+         IC    5,=X'FF'
+ALPHACON DC    3XL2'A6F4E'
+CONWRD   DC    3F'658474'
+         DC    FS4'2.25',H'+2',HS4'.25',FD'2E6',H'2E-6',HS6'-25.46'
+THREECON DC    FS4'10,25.3,10'
+         AH    7,=HS12'3.5E-2'
+ONECON   DC    F'123 456'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: decimal
+============================================================
+
+DECIMALS DC    PL8'+25.8,-3874,+2.3',Z'+80,-3.72'
+         UNPK  OUTAREA,=PL2'+25'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: address
+============================================================
+
+B        DC    A(X-*)
+         DC    A(L'=F'1.23')
+         DC    A(I'=F'3.45')
+         DC    A(S'=FS6'7.89')
+A        DC    5AL1(*-A)
+A        DC    Y(*-A,*+4)
+A        DC    Y(*,32768-(*-A))
+ACON     DC    A(108,LOP,END-STRT,*+4096)
+         DC    2S(*)
+         LA    1,=2S(*)
+         DC    VL4(ExtSym)
+VCONST   DC    V(SORT,MERGE,CALC)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (operator)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (keyword_operand
+            (keyword)
+            (expression
+              (word)
+              (string)))))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (keyword_operand
+            (keyword)
+            (expression
+              (word)
+              (string)))))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (keyword_operand
+            (keyword)
+            (expression
+              (word)
+              (string)))))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (operator)
+          (operator)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (operator)
+          (operator)
+          (word)
+          (operator)
+          (operator)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (operator)
+          (word)
+          (operator)
+          (list
+            (operator)
+            (operator)
+            (word))))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (word)
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (operator)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (operator)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (list
+          (operator)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (word)
+          (word))))))
+
+============================================================
+Chapter 5: float
+============================================================
+
+         DC    E'+525',D'-525',L'3.414',E'1E+6'
+         DC    DH'-2.5E1R4'
+         DC    LH'3.712E-3R5'
+         AE    6,=EE2'.46415'
+         DC    EB'(SNAN)',DB'-(INF)',LB'(MAX)'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string))
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: l type dc
+============================================================
+
+         DC    L'3.414'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 5: drop using
+============================================================
+
+         DROP  7,11
+         DROP  FIRST
+PRIOR    USING RECMAP,INREC
+         DROP  PRIOR,POST
+ALBL2    USING DSECTB,ALBL1.A
+BLBL1    USING DSECTA,ALBL2.A+4
+         USING BASE,9,10,11
+         USING *,12,13
+         LA    R11,4095(,R12)
+         MVC   DCBLRECL,DCBLRECL-IHADCB(R2)
+         MVC   PRIOR.DCBLRECL,NEXT.DCBLRECL
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (operator))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: ds
+============================================================
+
+RDAREA   DS    CL80
+         DS    0CL4
+TWO      DS    80C
+FIELD    DS    4CL10
+         DS    0D
+REGPAIR  DS    2ADL8
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: end
+============================================================
+
+         END   ENTRYPT,(MYCOMPILER,0101,00273)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (list
+          (word)
+          (word)
+          (word))))))
+
+============================================================
+Chapter 5: equ
+============================================================
+
+X        EQU   Z,*-Z
+Y        EQU   X,4
+B        EQU   A,,C'X'
+R1       EQU   1,,,,GR
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (operator)
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: exitctl
+============================================================
+
+         EXITCTL LISTING,256,*,,-128
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (operator))
+      (expression
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 5: ictl
+============================================================
+
+         ISEQ  73,80
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: loctr
+============================================================
+
+B        LOCTR ,                 See note 2
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (remarks))))
+
+============================================================
+Chapter 5: literals
+============================================================
+
+         MVC   FIVES,=XL16'05'
+         LM    4,5,=2F'1,2'
+         L     1,=A(*+4)
+         L     15,=V(B)
+         L     0,=R(B)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (list
+          (operator)
+          (operator)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word)
+        (list
+          (word))))))
+
+============================================================
+Chapter 5: mnote
+============================================================
+
+         MNOTE 8,'FIELD IS DEFINED OUTSIDE OF THE SIZE OPERAND'
+         MNOTE ,'ERROR, SEV 1'
+         MNOTE *,'COMMENT ONLY'
+         MNOTE 'NO ERROR'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (operator))
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string)))))
+
+============================================================
+Chapter 5: opsyn
+============================================================
+
+L        OPSYN LR
+STORE    OPSYN ST
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: org
+============================================================
+
+         ORG   *-500
+TABLE    DC    XL256'00'
+         ORG   TABLE+C'0'
+         DC    AL1(13)
+         ORG   ,
+         ORG   *+5
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (operator)
+        (operator)
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (operator)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 5: print
+============================================================
+
+         PUSH  PRINT            Save PRINT status
+         PRINT NOGEN
+         POP   PRINT,NOPRINT
+         PRINT ON,NODATA
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)))
+    (remarks))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: punch
+============================================================
+
+         PUNCH ' ENTRY PGM1'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string)))))
+
+============================================================
+Chapter 5: repro
+============================================================
+
+         REPRO
+THIS IS ANY TEXT AT ALL ' (
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (repro_data))
+
+============================================================
+Chapter 5: title
+============================================================
+
+PGM1     TITLE 'The First Heading'
+&VARSYM  SETC  'Value from Variable Symbol'
+         TITLE 'The &VARSYM'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string)))))
+
+============================================================
+Chapter 5: dcb
+============================================================
+
+DCBUT2   DCB   DDNAME=SYSUT2,DSORG=PS,MACRF=(PM)
+         LH    R0,DCBBLKSI
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word))))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 5: xattr
+============================================================
+
+SYM      XATTR LINKAGE(XPLINK),SCOPE(EXPORT),PSECT(name),              X
+               REFERENCE(DIRECT,DATA)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)))
+      (continuation)
+      (expression
+        (word)
+        (list
+          (word)
+          (word))))))
+
+============================================================
+Chapter 5: ainsert
+============================================================
+
+         MACRO
+         MAC1
+.A       AINSERT 'INSERT RECORD NUMBER ONE',FRONT  remark
+&FIRST   AREAD
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word)))
+    (remarks))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: inner macro
+============================================================
+
+         MACRO
+         OUTER &A,&C=
+         AIF   ('&C' EQ '').A
+         MACRO
+         INNER
+         MEND
+.A       ANOP
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (keyword_operand
+        (keyword))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (string)
+          (word)
+          (string))
+        (word))))
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: prototype formats
+============================================================
+
+         MACRO
+&NAME1   OP1   &OPERAND1,&OPERAND2,&OPERAND3 This is the normal        X
+               statement format
+         MEND
+         MACRO
+&NAME2   OP2   &OPERAND1,                      This is the alter-      X
+               &OPERAND2                       native statement format
+         MEND
+         MACRO
+&NAME3   OP3   &OPERAND1,                      This is a combination   X
+               &OPERAND2,&OPERAND3,            of both                 X
+               &OPERAND4
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks
+      (continuation)))
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word)))
+    (remarks))
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word))
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: call formats
+============================================================
+
+NAME1    OP1   OPERAND1,OPERAND2,OPERAND3       This is the normal     X
+               statement format
+NAME2    OP2   OPERAND1,                        This is the alter-     X
+               OPERAND2                         native statement format
+NAME3    OP3   OPERAND1,                        This is a combination  X
+               OPERAND2,OPERAND3                of both
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks
+      (continuation)))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word)))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks)))
+
+============================================================
+Chapter 6: model
+============================================================
+
+         MACRO
+         MAC1  &AREA,&C,&A
+LABEL    L     3,AREA
+LABEL2   L     3,2(4,5)
+&LABEL   L     3,&AREA
+FIELD&A  L     3,AREA&C
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: concat
+============================================================
+
+         MACRO
+         MAC1  &FIELD,&DISP,&BASE,&INT,&FRACT,&SYM,&SUBSCR,&A,&B
+         L     1,&FIELD.A
+         L     1,&DISP.(&BASE)
+         DC    D'&INT..&FRACT'
+         DC    D'&INT&FRACT'
+FIELD&A  DC    A(&A+&B.3-D)
+         L     1,&SYM(&SUBSCR)
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (operator)
+          (word)
+          (operator)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: move
+============================================================
+
+         MACRO
+&NAME    MOVE  &TO,&FROM
+&NAME    ST    2,SAVE
+         L     2,&FROM
+         ST    2,&TO
+         L     2,SAVE
+         MEND
+HERE     MOVE  FIELDA,FIELDB
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 6: aread
+============================================================
+
+         MACRO
+         MAC2
+&VAL     AREAD CLOCKB
+         DC    C'&VAL'
+&VAL1    AREAD CLOCKD
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: mexit
+============================================================
+
+         MACRO
+         EXITS
+         DC    C'A'
+         MEXIT
+         DC    C'D'
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: call var
+============================================================
+
+&CALL    SETC  'MAC1'
+         &CALL
+         &CALL OPERAND1=VALUE
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word))))))
+
+============================================================
+Chapter 6: positional
+============================================================
+
+         MACCALL VALUE,9,8
+         MACCALL &A,'QUOTED STRING'
+         MACCALL EXPR+2,,SYMBOL
+         MACCALL (A,B,C,D,E),(1,2,3,4)
+         MACCALL &A,'<.S.T.R.I.N.G>'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)
+          (word)
+          (word)))
+      (expression
+        (list
+          (word)
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (string)))))
+
+============================================================
+Chapter 6: keyword
+============================================================
+
+         MACKEY KEYWORD=(A,B,C,D,E)
+         MACKEY KEY1=1,KEY2=2,KEY3=3
+         MACKEY KEY3=2,KEY1=,KEYWORD=HALLO
+         MACKEY KEYWORD='<.S.T.R.I.N.G>'
+         MACKEY KEYWORD==C'STRING'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word)
+            (word)
+            (word)
+            (word))))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (string)))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (operator)
+          (word)
+          (string))))))
+
+============================================================
+Chapter 6: maccorr
+============================================================
+
+         MACRO
+         MACCORR &KEY1=DEFAULT,&KEY2=,&KEY3=123
+         DC    C'&KEY1&KEY2&KEY3'
+         MEND
+         MACCORR KEY1=OVERRIDE,KEY2=,KEY3=456
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word))))))
+
+============================================================
+Chapter 6: mix
+============================================================
+
+         MACRO
+         MIX   &P1,&KEY1=A,&P2,&P3,&P4,&KEY2=,&P5
+         MEND
+         MIX   KEY1=B,ONE,TWO,THREE,KEY2=33,FOUR,FIVE
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (keyword_operand
+        (keyword))
+      (expression
+        (word))))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 6: sublist
+============================================================
+
+&VAR1    SETC  '(1,2)'
+         MAC1  KEY=&VAR1
+&VAR2    SETC  '1,2'
+         MAC1  KEY=(&VAR2)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)))))))
+
+============================================================
+Chapter 6: sublists macro
+============================================================
+
+         MACRO
+         SUBLISTS &P1,&P2,&KEY=(F,F,)
+&KEY(1)  DC    &KEY(2)'&KEY(3)'
+&P1(1)   DC    &P1(2)'&P1(3)'
+         DC    A&P2
+         MEND
+         SUBLISTS (H2,H,2),(A,B,C)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (keyword_operand
+        (keyword)
+        (expression
+          (list
+            (word)
+            (word))))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))
+      (expression
+        (list
+          (word)
+          (word)
+          (word))))))
+
+============================================================
+Chapter 6: omitted
+============================================================
+
+         EXAMPLE 17,+4,,AREA,FIELD(6)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (operator)
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)
+        (list
+          (word))))))
+
+============================================================
+Chapter 6: ampersands
+============================================================
+
+         MAC1  &VAR,&A+&B+3+&C1,'&MESSAGE',&&REGISTER
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (word)
+        (operator)
+        (word)
+        (operator)
+        (word))
+      (expression
+        (string))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 6: quotes
+============================================================
+
+         MAC1  '','L''SYMBOL'
+         MAC1  L'SYMBOL'
+         MAC1  'QUOTE1'AND'QUOTE2'
+         MAC1  A'B'C
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string)
+        (word)
+        (string))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)
+        (word)))))
+
+============================================================
+Chapter 6: attr operands
+============================================================
+
+         MAC1  L'SYMBOL,1+L'AREAL'FIELD
+         DC    D'&INT'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word)
+        (operator)
+        (word)
+        (string)
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 6: attr operands2
+============================================================
+
+         MAC1  I'PACKED-S'PACKED
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 6: parens
+============================================================
+
+         MAC1  (PAIRED-PARENTHESES),(),(A(B)C)D(E),(IN'('STRING)
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (operator)
+          (word)))
+      (expression
+        (list))
+      (expression
+        (list
+          (word)
+          (list
+            (word))
+          (word))
+        (word)
+        (list
+          (word)))
+      (expression
+        (list
+          (word)
+          (string)
+          (word))))))
+
+============================================================
+Chapter 6: commas
+============================================================
+
+         MAC1  A,B,C,D,(1,2)3'5,6'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (list
+          (word)
+          (word))
+        (word)
+        (string)))))
+
+============================================================
+Chapter 6: equals
+============================================================
+
+         MAC1  =H'21',A'='B,C(A=B),2X=B,KEY=A=B
+         MAC1  K=L
+         MAC1  2+2=4
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (operator)
+        (word)
+        (string))
+      (expression
+        (word)
+        (string)
+        (word))
+      (expression
+        (word)
+        (list
+          (keyword_operand
+            (keyword)
+            (expression
+              (word)))))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)
+          (operator)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (keyword_operand
+        (keyword)
+        (expression
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word)
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 6: periods
+============================================================
+
+         MAC1  3.4,&A.1,&A..1
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)))))
+
+============================================================
+Chapter 6: ainsert macro
+============================================================
+
+         macro
+&name    ainsert_test_macro
+         ainsert '         Macro',back
+         ainsert 'Blah blah blah',front
+&aread   aread
+&aread   setc  '&aread'(1,1)
+         ainsert '&&n      seta n''&&syslist ',back
+         ainsert '         dc a(&&n)',back
+         ainsert '         dc c''&aread'' ',back
+         ainsert '         mend',back
+         mend
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 6: inner call
+============================================================
+
+         MACRO
+         OUT
+         IN    &SYSLIST(3),&SYSECT,A&SYSNDX
+         MEND
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 9: attrs
+============================================================
+
+&A       SETC  O'MVC
+&B       SETC  O'&A
+         AIF   ('&CHECKIT' EQ 'U').NOMAC
+.NOMAC   ANOP
+         AIF   (D'A).AROUND
+.AROUND  ANOP
+U1       DC    &X'1'
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (string)
+          (word)
+          (string))
+        (word))))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word))
+        (word))))
+  (statement
+    (name)
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))))
+
+============================================================
+Chapter 9: gbla
+============================================================
+
+         GBLA  &GA(25),&GA1(15)
+         GBLA  &GLOBAL_SYMBOL_FOR_DC_GEN,                              X
+               &LOOP_CONTRL_A,                                         X
+               &VALUE_PASSED_TO_FIDO,                                  X
+               &VALUE_RETURNED_FROM_FIDO
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))
+      (continuation)
+      (expression
+        (word))
+      (continuation)
+      (expression
+        (word))
+      (continuation)
+      (expression
+        (word)))))
+
+============================================================
+Chapter 9: seta
+============================================================
+
+&ASYM1   SETA  C'D'               &ASYM1 has value 196
+&CSYM2   SETC  'C''A'''           &CSYM2 has value C'A'
+&ASYM3   SETA  &CSYM2+&CSYM2
+&VAR     SETA  (&OP1 AND &OP2)
+&VAR     SETA  ('&OP1' FIND '&OP2')
+&VAR     SETA  FIND('&OP1','&OP2')
+&VAR     SETA  (NOT &OP1)
+&VAR     SETA  (&OP1 SLA &OP2)
+&VAR     SETA  (&OP1 XOR &OP2)
+&A       SETA  &C(1)+&C(2)-&C(3)
+&I       SETC  'C'''.'&X'(1,1).''''
+&VAL     SETA  &TRANS(&I)
+&X       SETC  'X''&H'''
+&LAST    SETA  N'&NUMBER
+&OP1     SETA  -344
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string)))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (operator)
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (string)
+          (word)
+          (string)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (string)
+          (string)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word))
+        (operator)
+        (word)
+        (list
+          (word))
+        (operator)
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (word)
+        (string)
+        (list
+          (word)
+          (word))
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (operator)
+        (word)))))
+
+============================================================
+Chapter 9: setb
+============================================================
+
+&VAR     SETB  (&OP1 AND &OP2)
+&B1      SETB  (L'&TO EQ 4)
+&B2      SETB  (S'&TO EQ 0)
+&A1      SETA  &B1
+&C1      SETC  '&B2'
+&B       SETB  (1 AND NOT 0)
+&B       SETB  (ISBIN('111') OR NOT ISHEX('ab34CD9F'))
+         AIF   (&A1 GT 3).A
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (list
+            (string))
+          (word)
+          (word)
+          (word)
+          (list
+            (string))))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word))
+        (word)))))
+
+============================================================
+Chapter 9: setc
+============================================================
+
+&C1      SETC  (3)'ABC'
+&C2      SETC  'ABC'.(3)'ABCDEF'(4,3)
+&A1      SETA  10
+&C5      SETC  (3)'&A1'
+&C(2)    SETC  '&SVAR'(1,3)
+&C(4)    SETC  '&SYSLIST(1,3)'(1,3)
+&X       SETC  DCVAL('&C')
+&C       SETC  DEQUOTE('a''b')
+&ARG     SETC  ''''''
+&LENGTH  SETC  'L''SYMBOL'
+&AMP     SETC  '&&'(1,1)
+&AND     SETC  'HALF&&'
+&GAMMA   SETC  '&ALPHA..RST'
+&DELTA   SETC  'A&DOT.&DOT'
+&RPTC1   SETC  'SEND   '.(BYTE 64)
+&BETA    SETC  'ABC'.'DEF'
+&SO      SETC  BYTE(X'E')
+&WORD    SETC  '&ALPHA'(1,4).'&ABC'
+&WORD    SETC  '&ALPHA'(1,4)'&ABC'(1,3)
+&SUBSTR1 SETC  '&STRING'(,4)
+&SUBSTR4 SETC  '&STRING'(3,-2)
+&C       SETC  'ABCDE'(2,)
+         AIF   ('&STRING'(1,4) EQ 'AREA').SEQ
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word))
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (word)
+        (list
+          (word))
+        (string)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word))
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (string)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (string)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (word)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)
+          (string)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (word))
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (word))
+        (string)
+        (list
+          (word)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)
+          (operator)
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string)
+        (list
+          (word)))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (string)
+          (list
+            (word)
+            (word))
+          (word)
+          (string))
+        (word)))))
+
+============================================================
+Chapter 9: seta list
+============================================================
+
+         LCLA  &LIST(5)
+&LIST(3) SETA  5,1,,2,25,3
+&LIST(3) SETA  5,                    THIS IS                           X
+               1,,                   AN ARRAY                          X
+               2,25,3                SPECIFICATION
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)
+        (list
+          (word)))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word))
+      (remarks)
+      (continuation)
+      (expression
+        (word))
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks)))
+
+============================================================
+Chapter 9: setaf
+============================================================
+
+&MAX_VAL SETAF 'MAX',7,4           Calls the external function         X
+                                   MAX, passing values 7 and           X
+                                   4 as operands.
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))
+      (expression
+        (word))
+      (expression
+        (word)))
+    (remarks
+      (continuation)
+      (continuation))))
+
+============================================================
+Chapter 9: aif extended
+============================================================
+
+         AIF   ('&L'(&C,1) EQ '$').DOLR,                               X
+               ('&L'(&C,1) EQ '#').POUND,                              X
+               ('&L'(&C,1) EQ '=').EQUAL,                              X
+               ('&L'(&C,1) EQ '(').LEFTPAR,                            X
+               ('&L'(&C,1) EQ '-').MINUS
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (string)
+          (list
+            (word)
+            (word))
+          (word)
+          (string))
+        (word))
+      (continuation)
+      (expression
+        (list
+          (string)
+          (list
+            (word)
+            (word))
+          (word)
+          (string))
+        (word))
+      (continuation)
+      (expression
+        (list
+          (string)
+          (list
+            (word)
+            (word))
+          (word)
+          (string))
+        (word))
+      (continuation)
+      (expression
+        (list
+          (string)
+          (list
+            (word)
+            (word))
+          (word)
+          (string))
+        (word))
+      (continuation)
+      (expression
+        (list
+          (string)
+          (list
+            (word)
+            (word))
+          (word)
+          (string))
+        (word)))))
+
+============================================================
+Chapter 9: ago
+============================================================
+
+         AGO   (&I).FIRST,.SECOND,                                     X
+               .THIRD,.FOURTH
+         AGO   (&I).FIRST,                                             X
+               .SECOND,                                                X
+               .THIRD,                                                 X
+               .FOURTH
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word))
+        (word))
+      (expression
+        (word))
+      (continuation)
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word))
+        (word))
+      (continuation)
+      (expression
+        (word))
+      (continuation)
+      (expression
+        (word))
+      (continuation)
+      (expression
+        (word)))))
+
+============================================================
+Chapter 9: move macro
+============================================================
+
+         MACRO
+&NAME    MOVE  &T,&F
+         AIF   (T'&T EQ 'F').FIRST            Statement 1
+         AGO   .END                           Statement 2
+.FIRST   AIF   (T'&T NE T'&F).END             Statement 3
+&NAME    ST    2,SAVEAREA
+.END     MEND                                 Statement 4
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (string))
+        (word)))
+    (remarks))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word)))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (word))
+        (word)))
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word))
+      (expression
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (remarks)))
+
+============================================================
+Chapter 9: actr
+============================================================
+
+         ACTR  200
+         LCLC  &TYPE
+         AIF   (T'&T EQ 'F').FTYPE
+&TYPE    SETC  'E'
+.FTYPE   ANOP
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (word))))
+  (statement
+    (operation)
+    (operands
+      (expression
+        (list
+          (word)
+          (word)
+          (string))
+        (word))))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (string))))
+  (statement
+    (name)
+    (operation)))
+
+============================================================
+Appendix A: operand field taken as a remark
+============================================================
+
+A        CSECT Don't
+         LTORG (POOL HERE
+         EJECT 'x
+         ANOP  it's
+         macro
+         mac1
+         mexit 'x
+         mend  'y
+CSECT    DC    F'1'
+B        DSECT ,                                                       X
+                   continued remark
+         csect
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (name)
+    (operation)
+    (remarks))
+  (statement
+    (operation)
+    (remarks))
+  (statement
+    (operation)
+    (remarks))
+  (statement
+    (operation)
+    (remarks))
+  (statement
+    (operation))
+  (statement
+    (operation))
+  (statement
+    (operation)
+    (remarks))
+  (statement
+    (operation)
+    (remarks))
+  (statement
+    (name)
+    (operation)
+    (operands
+      (expression
+        (word)
+        (string))))
+  (statement
+    (name)
+    (operation)
+    (remarks
+      (continuation)))
+  (statement
+    (operation)))
+
+============================================================
+Chapter 5: REPRO data line
+============================================================
+
+         REPRO  next line is data
+ABC DEF 'unclosed (
+         END
+
+------------------------------------------------------------
+
+(source_file
+  (statement
+    (operation)
+    (remarks))
+  (repro_data)
+  (statement
+    (operation)))

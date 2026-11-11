@@ -25,6 +25,8 @@ module.exports = grammar({
     $.sequence_number,
     $._error_sentinel,
     $._field,
+    $._operand_field_remark,
+    $.repro_data,
   ],
 
   extras: $ => [$.continuation, $.sequence_number],
@@ -37,7 +39,7 @@ module.exports = grammar({
       repeat(seq($._newline, optional($._line))),
     ),
 
-    _line: $ => choice($.statement, $.comment, $._blank),
+    _line: $ => choice($.statement, $.comment, $.repro_data, $._blank),
 
     statement: $ => seq(
       optional(field('name', $.name)),
@@ -45,9 +47,12 @@ module.exports = grammar({
       field('operation', $.operation),
       optional(seq(
         $._blank,
-        optional(seq(
-          field('operands', $.operands),
-          optional(seq($._blank, optional(field('remarks', $.remarks)))),
+        optional(choice(
+          seq(
+            field('operands', $.operands),
+            optional(seq($._blank, optional(field('remarks', $.remarks)))),
+          ),
+          field('remarks', alias($._operand_field_remarks, $.remarks)),
         )),
       )),
     ),
@@ -94,6 +99,8 @@ module.exports = grammar({
     operator: _ => /[=+\-*\/<>¬|!?:;%"\\]/,
 
     remarks: $ => repeat1($._remark),
+
+    _operand_field_remarks: $ => seq($._operand_field_remark, repeat($._remark)),
 
     comment: $ => seq($._comment_line, repeat($._remark)),
 

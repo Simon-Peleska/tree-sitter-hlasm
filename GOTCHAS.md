@@ -1,9 +1,14 @@
 # Gotchas
 
 - The operand field ends at the first blank outside quotes and parentheses,
-  and the rest is remarks. The grammar doesn't know which instructions take no
-  operands, so in `LTORG  POOL HERE` the word `POOL` is an operand.
-  An unpaired quote there (`CSECT  Don't`) is a parse error.
+  and the rest is remarks. The instructions whose whole operand field HLASM
+  takes as a remark (Appendix A: `ANOP`, `CSECT`, `LTORG`, `MEND`, ...) are
+  listed in `src/scanner.c`, which remembers the last field it lexed: the
+  operation. A macro that redefines one of them still gets remarks.
+- The line after `REPRO` is data (`repro_data`), whatever it holds.
+- `L'X` is an attribute reference, but `D'&INT'` is a D-type constant and
+  `MAC1 L'AREA'B` a string in a macro operand, so a letter-quote-symbol run
+  that ends in another quote is a word and a string. `L'*` is `L'` and `*`.
 - The name and operation fields are any run of non-blanks, as in Che4z:
   z390's `:&N SETA 1`, banner lines of dashes and PL/S text that macros skip
   (`BYTES)  */`) all parse. A quoted part may hold blanks (z390:

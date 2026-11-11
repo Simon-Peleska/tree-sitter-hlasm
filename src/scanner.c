@@ -9,16 +9,25 @@
 // into column 72 is lexed here so it stops at column 71; columns are 0-based
 // below (CONTINUATION_COLUMN is column 72).
 
-enum TokenType { WORD, STRING, REMARK, OPERAND_REMARK, COMMENT_LINE, CONTINUATION, SEQUENCE_NUMBER, ERROR_SENTINEL, FIELD };
+enum TokenType {
+  WORD, STRING, REMARK, OPERAND_REMARK, COMMENT_LINE, CONTINUATION, SEQUENCE_NUMBER, ERROR_SENTINEL, FIELD,
+  OPERAND_FIELD_REMARK, REPRO_DATA,
+};
 
 #define CONTINUATION_COLUMN 71
+
+// Some instructions take everything after the operation as remarks, and the
+// line after REPRO is data. The last field lexed is the operation when the
+// operand field starts, so the scanner remembers what it was.
+enum Operation { OTHER, REMARKS_ONLY, REPRO };
 
 // Remarks after a comma end with their line; the operands go on after the
 // continuation. To tell them apart the scanner remembers where the last
 // continuation it lexed ended.
 typedef struct {
-  bool continued;
   uint32_t column;
+  bool continued;
+  uint8_t operation;
 } Scanner;
 
 void *tree_sitter_hlasm_external_scanner_create(void) { return ts_calloc(1, sizeof(Scanner)); }
@@ -33,6 +42,7 @@ void tree_sitter_hlasm_external_scanner_deserialize(void *payload, const char *b
   Scanner *scanner = payload;
   scanner->continued = false;
   scanner->column = 0;
+  scanner->operation = OTHER;
   if (length == sizeof(Scanner)) memcpy(scanner, buffer, sizeof(Scanner));
 }
 
@@ -50,6 +60,20 @@ static bool is_word_char(int32_t c) {
 
 // Files that went through a binary transfer carry NUL bytes; Che4z reads them as blanks.
 static bool is_blank(int32_t c) { return c == ' ' || c == '\t' || c == 0; }
+
+// The instructions whose operand field the assembler takes as a remark
+// (HLASM Language Reference, Appendix A).
+static const char *REMARKS_ONLY_OPERATIONS[] = {
+  "AEJECT", "ANOP", "COM", "CSECT", "CXD", "DSECT", "EJECT", "LTORG", "MACRO", "MEND", "MEXIT", "RSECT",
+};
+
+static uint8_t classify_operation(const char *text) {
+  if (strcmp(text, "REPRO") == 0) return REPRO;
+  for (unsigned i = 0; i < sizeof(REMARKS_ONLY_OPERATIONS) / sizeof(REMARKS_ONLY_OPERATIONS[0]); i++) {
+    if (strcmp(text, REMARKS_ONLY_OPERATIONS[i]) == 0) return REMARKS_ONLY;
+  }
+  return OTHER;
+}
 
 static bool is_attribute(int32_t c) {
   switch (c) {
@@ -93,6 +117,13 @@ bool tree_sitter_hlasm_external_scanner_scan(void *payload, TSLexer *lexer, cons
   }
   if (valid_symbols[ERROR_SENTINEL]) return false;
 
+  if (column == 0 && valid_symbols[REPRO_DATA] && scanner->operation == REPRO) {
+    while (!at_line_end(lexer)) lexer->advance(lexer, false);
+    scanner->operation = OTHER;
+    lexer->result_symbol = REPRO_DATA;
+    return true;
+  }
+
   // A `*` or `.*` in column 1 starts a comment line. Like any statement it is
   // continued when column 72 is not blank (a box of 72 asterisks swallows the
   // next line, as in HLASM).
@@ -119,8 +150,15 @@ bool tree_sitter_hlasm_external_scanner_scan(void *payload, TSLexer *lexer, cons
   }
 
   if (valid_symbols[FIELD] && !is_blank(lexer->lookahead)) {
+    char text[8] = {0};
+    unsigned length = 0;
     for (;;) {
       while (column < CONTINUATION_COLUMN && !is_blank(lexer->lookahead) && !at_line_end(lexer)) {
+        if (length < sizeof(text)) {
+          int32_t c = lexer->lookahead;
+          text[length] = c >= 'a' && c <= 'z' ? (char)(c - 'a' + 'A') : c < 128 ? (char)c : '?';
+        }
+        length++;
         // z390 allows quoted names with blanks in them ('X0 AR 1,2 '); an unpaired quote is an error.
         if (lexer->lookahead == '\'') {
           do {
@@ -139,17 +177,19 @@ bool tree_sitter_hlasm_external_scanner_scan(void *payload, TSLexer *lexer, cons
       if (is_blank(lexer->lookahead) || at_line_end(lexer)) break;
       column = lexer->get_column(lexer);
     }
+    scanner->operation = length < sizeof(text) ? classify_operation(text) : OTHER;
     lexer->result_symbol = FIELD;
     return true;
   }
 
   bool operand_remark = valid_symbols[OPERAND_REMARK] && !just_continued;
-  if ((valid_symbols[REMARK] || operand_remark) && lexer->lookahead != ' ') {
+  bool operand_field_remark = valid_symbols[OPERAND_FIELD_REMARK] && scanner->operation != OTHER;
+  if ((valid_symbols[REMARK] || operand_remark || operand_field_remark) && lexer->lookahead != ' ') {
     while (column < CONTINUATION_COLUMN && !at_line_end(lexer)) {
       lexer->advance(lexer, false);
       column++;
     }
-    lexer->result_symbol = valid_symbols[REMARK] ? REMARK : OPERAND_REMARK;
+    lexer->result_symbol = operand_field_remark ? OPERAND_FIELD_REMARK : valid_symbols[REMARK] ? REMARK : OPERAND_REMARK;
     return true;
   }
 
@@ -196,18 +236,17 @@ bool tree_sitter_hlasm_external_scanner_scan(void *payload, TSLexer *lexer, cons
       lexer->advance(lexer, false);
       column++;
       int32_t next = lexer->lookahead;
-      // L'=C'ABC' is the length attribute of a literal.
-      if (next == '=' || (is_word_char(next) && !(next >= '0' && next <= '9') && next != '.')) {
-        if (next == '=') {
-          lexer->result_symbol = WORD;
-          lexer->mark_end(lexer);
-          return true;
-        }
+      // L'=C'ABC' is the length attribute of a literal, L'* that of the location counter.
+      if (next == '=' || next == '*') {
+        lexer->mark_end(lexer);
+      } else if (is_word_char(next) && !(next >= '0' && next <= '9') && next != '.') {
         while (column < CONTINUATION_COLUMN && is_word_char(lexer->lookahead)) {
           lexer->advance(lexer, false);
           column++;
         }
-        lexer->mark_end(lexer);
+        // D'&INT' is a constant and MAC1 L'AREA'B a string in a macro operand: a closing
+        // quote makes it a string, so the token is just the letter.
+        if (lexer->lookahead != '\'') lexer->mark_end(lexer);
       }
     }
     lexer->result_symbol = WORD;

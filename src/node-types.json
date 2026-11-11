@@ -147,6 +147,10 @@
           "named": true
         },
         {
+          "type": "repro_data",
+          "named": true
+        },
+        {
           "type": "statement",
           "named": true
         }
@@ -231,6 +235,10 @@
   },
   {
     "type": "operator",
+    "named": true
+  },
+  {
+    "type": "repro_data",
     "named": true
   },
   {
